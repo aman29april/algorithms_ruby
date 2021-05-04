@@ -10,47 +10,40 @@
 # Output:   60  // The subarray is {60}
 
 # Input: arr[] = {-2, -40, 0, -2, -3}
-# Output:   80  // The subarray is {-2, -40} 
-
+# Output:   80  // The subarray is {-2, -40}
 
 def largest_product_brutforce(ar)
-	max = 0
-	prod = 0
-	for i in 0..ar.length-2
-		prod = 1
-		for j in i..ar.length-1
-			prod = prod * ar[j]
-			if(max < prod)
-				max = prod
-			end
-			
-		end
-	end
-	max
+  max = 0
+  prod = 0
+  (0..ar.length - 2).each do |i|
+    prod = 1
+    (i..ar.length - 1).each do |j|
+      prod *= ar[j]
+      max = prod if max < prod
+    end
+  end
+  max
 end
-
 
 def largest_product_subarray(ar)
-	max_till_now, max_ending_here = 0, 0
-	for e in ar
-		if e == 0
-			max_ending_here = 0
-			next
-		end
-		
-		if(max_ending_here == 0)
-			max_ending_here = e
-		else
-			max_ending_here *= e
-		end
+  max_till_now = 0
+  max_ending_here = 0
+  ar.each do |e|
+    if e == 0
+      max_ending_here = 0
+      next
+    end
 
-		if(max_ending_here > max_till_now)
-			max_till_now = max_ending_here
-		end
-	end
-	max_till_now
+    if max_ending_here == 0
+      max_ending_here = e
+    else
+      max_ending_here *= e
+    end
+
+    max_till_now = max_ending_here if max_ending_here > max_till_now
+  end
+  max_till_now
 end
-
 
 # puts largest_product_subarray([6, -3, -10, 0, 2])
 

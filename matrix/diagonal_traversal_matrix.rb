@@ -19,29 +19,29 @@
 # 20
 
 def print_matrix(m)
-	(0...m.length).each do |i|
-		step = 0
-		(0..i).each do |j|
-			print "#{m[i-step][step]} "
-			step +=1
-		end	
-		puts ""
-	end
+  (0...m.length).each do |i|
+    step = 0
+    (0..i).each do |_j|
+      print "#{m[i - step][step]} "
+      step += 1
+    end
+    puts ''
+  end
 end
 
 def print_diagonal(m)
-	rows, cols = m.length, m[0].length
-	n = rows + cols - 1
-	ar = Array.new(n) { |i| [] }
-	(0...rows).each do |r|
-		(0...cols).each do |c|
-			ar[r+c].append(m[r][c])
-		end
-	end
-	(0...n).each do |i|
-
-		puts ar[i].reverse.join(' ')
-	end
+  rows = m.length
+  cols = m[0].length
+  n = rows + cols - 1
+  ar = Array.new(n) { |_i| [] }
+  (0...rows).each do |r|
+    (0...cols).each do |c|
+      ar[r + c].append(m[r][c])
+    end
+  end
+  (0...n).each do |i|
+    puts ar[i].reverse.join(' ')
+  end
 end
 
 m = [[1, 2, 3, 4],

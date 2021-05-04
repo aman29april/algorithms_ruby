@@ -1,6 +1,5 @@
 require './tree_node'
-require "./height"
-
+require './height'
 
 root = TreeNode.new(3)
 root.left = TreeNode.new(9)
