@@ -1,4 +1,4 @@
-require './height'
+require_relative './height'
 class TreeNode
   attr_accessor :val, :left, :right
 
@@ -6,5 +6,9 @@ class TreeNode
     @val = val
     @left = left
     @right = right
+  end
+
+  def to_s
+    "left: #{left}, val: #{val}, right: #{right}"
   end
 end

@@ -67,7 +67,7 @@ end
 
 def get_level(node, level)
   return [] if node.nil?
-  return [node.val] if level == 0
+  return [node.val] if level.zero?
 
   [get_level(node.left, level - 1) +
     get_level(node.right, level - 1)]

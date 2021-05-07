@@ -29,12 +29,12 @@ def largest_product_subarray(ar)
   max_till_now = 0
   max_ending_here = 0
   ar.each do |e|
-    if e == 0
+    if e.zero?
       max_ending_here = 0
       next
     end
 
-    if max_ending_here == 0
+    if max_ending_here.zero?
       max_ending_here = e
     else
       max_ending_here *= e

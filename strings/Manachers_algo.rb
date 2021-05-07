@@ -22,7 +22,7 @@ def longest_palindrome(s)
 
     expand = false
 
-    if 0 < diff
+    if diff > 0
       len = p_len[mirror]
 
       if len < diff
@@ -46,7 +46,7 @@ def longest_palindrome(s)
     end
 
     if expand
-      while (i + p_len[i]) < n && 0 < (i - p_len[i]) && (not_boundary_char(p_len,
+      while (i + p_len[i]) < n && (i - p_len[i]) > 0 && (not_boundary_char(p_len,
                                                                            i) || same_char?(chars, p_len, i))
         p_len[i] += 1
       end

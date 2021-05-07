@@ -15,7 +15,7 @@ def inorder_iterative(node)
   stack = []
   result = []
 
-  while true
+  loop do
     if !current.nil?
       stack.append current
       current = current.left

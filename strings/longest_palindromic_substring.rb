@@ -27,7 +27,7 @@ def longest_palindrom_dp(str)
   dp = Array.new(length) { |_i| Array.new(length, false) }
   (0...length).each do |gap|
     (gap...length).each do |j|
-      if gap == 0
+      if gap.zero?
         dp[j - gap][j] = true
       elsif gap == 1
         if str[j - gap] == str[j]

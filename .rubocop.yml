@@ -1,0 +1,9 @@
+Style/NumericPredicate:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+LineLength:
+  Max: 120
+Documentation:
+  Enabled: false
+
