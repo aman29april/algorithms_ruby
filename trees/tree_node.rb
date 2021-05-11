@@ -8,7 +8,7 @@ class TreeNode
     @right = right
   end
 
-  def to_s
-    "left: #{left}, val: #{val}, right: #{right}"
-  end
+  # def to_s
+  #   "left: #{left}, val: #{val}, right: #{right}"
+  # end
 end
