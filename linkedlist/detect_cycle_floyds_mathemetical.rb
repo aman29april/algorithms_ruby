@@ -12,13 +12,14 @@ def detectCycle(head)
 
     next unless slow == fast
 
+    # There is cycle, set slow as head and increment slow and fast by 1
     slow = head
 
     while slow != fast
       slow = slow.next
       fast = fast.next
     end
-
+    # node where both fast and slow will meet is starting  of cycle.
     return fast
   end
   nil

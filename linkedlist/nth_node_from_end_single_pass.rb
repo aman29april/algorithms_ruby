@@ -33,6 +33,7 @@ def remove_nth_from_end(head, n)
     ptr2 = ptr2.next if count > n
     count += 1
   end
+  # if 1st noe is to be deleted
   return head.next if count == n
 
   ptr2.next = ptr2.next.next

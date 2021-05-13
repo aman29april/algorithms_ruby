@@ -27,7 +27,6 @@ class LinkList
     output = []
     while head
       output << head.val
-      puts output
       head = head.next
     end
     puts output.to_s
