@@ -4,57 +4,36 @@ module HeapType
 end
 
 class Heap
-  attr_reader :items, :type
+  attr_reader :type
 
-  def initialize(nums = [], type = HeapType::MAX)
+  def initialize(nums = [], type = HeapType::MAX, &compatrator)
     @items = nums
     @type = type
+    set_comparator(&compatrator)
     build_heap(@items) if nums.any?
   end
 
-  def build_heap(nums)
-    length = nums.length
-    start = first_non_leaf_index
-    start.downto(0).each do |i|
-      heapify(nums, i)
-    end
+  def clear
+    @items = []
   end
 
-  # def heapify_max(nums = @items, index)
-  #   length = nums.length
-  #   left = left(index)
-  #   right = right(index)
-  #   largest = index
-  #   largest = left if has_left?(index) && nums[left] > nums[largest]
-  #   largest = right if has_right?(index) && nums[right] > nums[largest]
-
-  #   return if largest == index
-
-  #   swap(largest, index)
-  #   heapify_max(nums, largest)
-  # end
-
-  def heapify(nums = @items, index)
-    length = nums.length
-    left = left(index)
-    right = right(index)
-    new_index = index
-
-    # if max heap, left or right will be greater than new_index
-    compatrator = is_max_heap? ? :> : :<
-
-    # equivalent to has_left?(index) && nums[left] >  nums[new_index] in case of max heap
-    new_index = left if has_left?(index) && nums[left].public_send(compatrator, nums[new_index])
-    new_index = right if has_right?(index) && nums[right].public_send(compatrator, nums[new_index])
-
-    return if new_index == index
-
-    swap(new_index, index)
-    heapify(nums, new_index)
+  def add(element)
+    @items << element
+    rebalance_up(size - 1)
   end
+
+  alias << add
 
   def peek
     @items[0]
+  end
+
+  def empty?
+    size == 0
+  end
+
+  def any?
+    !empty?
   end
 
   def is_max_heap?
@@ -80,6 +59,12 @@ class Heap
     item
   end
 
+  def size
+    @items.count
+  end
+
+  private
+
   def heapify_down
     heapify(@items, 0)
   end
@@ -96,8 +81,8 @@ class Heap
     right(i) < size
   end
 
-  def size
-    @items.count
+  def swap(i, j)
+    @items[i], @items[j] = @items[j], @items[i]
   end
 
   def first_non_leaf_index
@@ -112,9 +97,62 @@ class Heap
     2 * i + 2
   end
 
-  def root(i); end
+  def parent(i)
+    ((i - 1) / 2).floor
+  end
 
-  def swap(i, j)
-    @items[i], @items[j] = @items[j], @items[i]
+  def has_parent?(i)
+    i >= 1
+  end
+
+  def set_comparator(&comparator)
+    @compare = if block_given?
+                 comparator
+               elsif is_min_heap?
+                 ->(a, b) { a < b }
+               else
+                 ->(a, b) { a > b }
+               end
+  end
+
+  def compare(a, b)
+    @compare.call(a, b)
+  end
+
+  def heapify(nums = @items, index)
+    length = nums.length
+    left = left(index)
+    right = right(index)
+    new_index = index
+
+    # if max heap, left or right will be greater than new_index
+    compatrator = is_max_heap? ? :> : :<
+
+    # equivalent to has_left?(index) && nums[left] >  nums[new_index] in case of max heap
+    new_index = left if has_left?(index) && compare(nums[left], nums[new_index])
+    new_index = right if has_right?(index) && compare(nums[right], nums[new_index])
+
+    return if new_index == index
+
+    swap(new_index, index)
+    heapify(nums, new_index)
+  end
+
+  def rebalance_up(index)
+    parent_index = parent(index)
+    # puts [index, parent_index].to_s
+    if has_parent?(index) && compare(@items[index], @items[parent_index])
+      swap(index, parent_index)
+      # puts parent_index
+      rebalance_up(parent_index)
+    end
+  end
+
+  def build_heap(nums)
+    length = nums.length
+    start = first_non_leaf_index
+    start.downto(0).each do |i|
+      heapify(nums, i)
+    end
   end
 end

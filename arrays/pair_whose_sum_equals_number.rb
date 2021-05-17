@@ -28,6 +28,18 @@ def findPairUsingHash(ar, sum)
   pairs.to_s
 end
 
+# Leetcode solution
+def two_sum(nums, target)
+  return if nums.empty?
+
+  hash = {}
+  nums.each_with_index do |num, i|
+    return [i, hash[target - num]] if hash.key?(target - num)
+
+    hash[num] = i
+  end
+end
+
 ar = [0, 14, 0, 4, 7, 8, 3, 5, 7]
 sum = 11
 # puts findPairBrutforce(ar, sum)
