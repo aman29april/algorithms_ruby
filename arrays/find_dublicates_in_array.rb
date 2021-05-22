@@ -1,7 +1,7 @@
 # Find duplicates in a given array when elements are not limited to a range
 
 def findDuplicates(ar)
-  dublicates = []
+  duplicates = []
   ar_hash = {}
   size = ar.length
   ar.each_with_index do |val, index|
@@ -10,22 +10,22 @@ def findDuplicates(ar)
     end
   end
   ar_hash.each do |k, v|
-    dublicates.push k if v > 1
+    duplicates.push k if v > 1
   end
-  dublicates.to_s
+  duplicates.to_s
 end
 
 def findDuplicatesWithHash(ar)
-  dublicates = []
+  duplicates = []
   ar_hash = {}
   size = ar.length
   ar.each_with_index do |val, _index|
     ar_hash[val] = ar_hash[val].to_i + 1
   end
   ar_hash.each do |k, v|
-    dublicates.push k if v > 1
+    duplicates.push k if v > 1
   end
-  dublicates.to_s
+  duplicates.to_s
 end
 
 puts findDuplicatesWithHash([2, 10, 10, 100, 2, 10, 11, 2, 11, 2])

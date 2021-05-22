@@ -10,11 +10,11 @@ class Vertice
 end
 
 class Graph
-  def initialize()
+  def initialize
     @vertices = []
   end
 
-   def add_edge(node_a, node_b)
+  def add_edge(node_a, node_b)
     node_a.adjacents << node_b
     node_b.adjacents << node_a
   end
