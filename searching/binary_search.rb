@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/binary-search/
+#
 # Recursive solution
 def b_search(ar, target, l, r)
   # l, r = 0, ar.length-1
@@ -23,6 +25,7 @@ def binary_search(arr, target)
       left = mid + 1
     end
   end
+  -1
 end
 
 ar = [1, 3]
