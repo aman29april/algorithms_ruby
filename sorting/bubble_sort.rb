@@ -8,4 +8,20 @@ def bubble_sort(ar)
   ar.to_s
 end
 
+# METHOD 2, optimized
+def bubble_sort(ar)
+  return ar if ar.size <= 1
+
+  swapped = true
+  while swapped
+    swapped = false
+    (ar.length - 1).times do |i|
+      if ar[i] > ar[i + 1]
+        ar[i], ar[i + 1] = ar[i + 1], ar[i]
+        swapped = true
+      end
+    end
+  end
+  ar
+end
 puts bubble_sort([9, 30, 2, 88, 3, 98, 45])
